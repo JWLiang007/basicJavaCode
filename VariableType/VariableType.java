@@ -4,7 +4,11 @@ public class VariableType {
 		/* 8 basic variable type totally */
 		
 		boolean boolVar = true;	// value should be either true or false
-		char charVar = 'c';	
+		char charVar = 'c';		/* 16bit-length
+								** '\u0000' - Unicode escape form
+								** - transferred before resolving："\u0022+\u0022" ==> ""+""
+								** - checked in comment: // \u0000 
+								*/
 		byte byteVar = -27;
 		short shortVar = -215;
 		int intVar = -231;
