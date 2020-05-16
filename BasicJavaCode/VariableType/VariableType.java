@@ -4,7 +4,7 @@ public class VariableType {
 		/* 8 basic variable type totally */
 		
 		boolean boolVar = true;	// value should be either true or false
-		char charVar = 'c';		/* 16bit-length
+		char charVar = 'c';		/* one Unicode char = one code point = one/two code unit
 								** '\u0000' - Unicode escape form
 								** - transferred before resolving："\u0022+\u0022" ==> ""+""
 								** - checked in comment: // \u0000 
