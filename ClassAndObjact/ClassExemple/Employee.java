@@ -1,7 +1,15 @@
 /*
 	key word: 
-		final; instance.clone(); class method's access priviledge; this; 
+		final; 
+		instance.clone(); 
+		class method's access priviledge; 
+		this; 
 		static; 
+		static constant; 
+		static method;
+		constructor;
+		initialization block;
+		constructor order;
 */
 
 import java.time.LocalDate;
@@ -15,12 +23,43 @@ public class Employee{
 	
 	// static descriptor - all instances share one static field (class field)
 	//  it belongs to class rather than instance
+	//
+	// explicit initialization - not confined to be constant but method
 	private static int nextId = 1;
+	
+	// static constant
+	//  can be set as public, bacause it's final and has been assigned
+	public static final double PI = 3.14;
 	
 	private int id;
 	private double salary;
 	private LocalDate hireDay;
 	
+	/*
+		constructor order:
+			1) all instance fields are initialized to be default values;
+			2) execute initialization statements and initialization blocks in order
+			3) if another constructor is embedded into the constructor, run that constructor
+			4) run the rest of the constructor
+	*/
+	
+	// initialization blocks run before constructor
+	{
+		// initialization block
+	}
+	
+	// static initialization blocks - for static field
+	static {
+		// static initialization block
+	}
+	
+	// a constructor can call another constructor for initialization
+	public Employee(){
+		this("aName", 0, 2019, 7, 15);
+	}
+	
+	// Only if no constructor is defined, a constructor without parameter will be provided
+	//  so it would be better if a explicit constructor without parameter is provided
 	public Employee(String n, double s, int year, int month, int day){
 		name = n;
 		salary = s;
@@ -33,6 +72,12 @@ public class Employee{
 	
 	public int getId(){
 		return id;
+	}
+	
+	// static method - class method - className.method()
+	//  it can only access static field and doesn't have implicit parameter (this)
+	public static int getNextId(){
+		return nextId;
 	}
 	
 	public void setId(){
@@ -59,7 +104,7 @@ public class Employee{
 		// private instance field can be accessed by class method 
 		// 	which means one instance's private instance field (other.name) can be accessed
 		//	by another's method (this.equals())
-		return name.equals(other.name)
+		return name.equals(other.name);
 	}
 	
 	public void raiseSalary(double byPercent){
@@ -69,8 +114,5 @@ public class Employee{
 		salary = salary * ( 1 + byPercent / 100 );
 		
 	}
-	
-
-	
 	
 }
